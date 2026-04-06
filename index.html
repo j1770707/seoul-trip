@@ -1,1 +1,649 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>首爾旅遊指南 · Seoul, My Way</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --paper: #f5f0e8;
+    --paper2: #ede8dc;
+    --accent: #c8401a;
+    --accent2: #2a4a6b;
+    --gold: #b8943e;
+    --muted: #7a7060;
+    --border: #ccc9bc;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #e0dbd0;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 32px 16px;
+  }
+  .magazine {
+    background: var(--paper);
+    max-width: 860px;
+    margin: 0 auto;
+    border: 0.5px solid var(--border);
+    box-shadow: 0 12px 48px rgba(0,0,0,0.15);
+  }
+  .hero {
+    position: relative;
+    height: 520px;
+    overflow: hidden;
+    background: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to bottom, rgba(10,10,10,0.05) 0%, rgba(10,10,10,0.82) 100%),
+      url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Gyeongbok_Palace_in_Seoul.jpg/1280px-Gyeongbok_Palace_in_Seoul.jpg') center/cover no-repeat;
+  }
+  .hero-label {
+    position: absolute; top: 28px; left: 32px;
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+  }
+  .issue-tag {
+    position: absolute; top: 24px; right: 32px;
+    font-size: 11px; letter-spacing: 0.15em;
+    color: rgba(255,255,255,0.5);
+    border: 0.5px solid rgba(255,255,255,0.3);
+    padding: 4px 12px;
+  }
+  .hero-content { position: relative; z-index: 2; padding: 0 32px 36px; }
+  .hero-kicker {
+    font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--gold); font-weight: 500; margin-bottom: 10px;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 56px; font-weight: 700; color: #fff;
+    line-height: 1.0; letter-spacing: -0.5px;
+  }
+  .hero-title em { font-style: italic; color: #e8d8a0; }
+  .hero-dates { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+  .hero-date-pill {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(255,255,255,0.1);
+    border: 0.5px solid rgba(255,255,255,0.25);
+    padding: 6px 14px; font-size: 12px;
+    color: rgba(255,255,255,0.8); letter-spacing: 0.03em;
+  }
+  .pdot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+  .pdot.go { background: var(--gold); }
+  .pdot.back { background: #88aacc; }
+  .pdot.hotel { background: #aaa; }
+  .rule-bar { background: var(--accent); height: 3px; }
+  .intro-row {
+    display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .intro-stat {
+    padding: 20px 12px; border-right: 0.5px solid var(--border); text-align: center;
+  }
+  .intro-stat:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 700; color: var(--accent); line-height: 1;
+  }
+  .stat-label {
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); margin-top: 4px; line-height: 1.5;
+  }
+  .transport-section { border-bottom: 0.5px solid var(--border); padding: 24px 32px; }
+  .section-label {
+    font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 14px;
+  }
+  .transport-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .transport-card { background: var(--paper2); border: 0.5px solid var(--border); padding: 14px 16px; }
+  .tc-route {
+    font-size: 12px; font-weight: 500; color: var(--ink);
+    margin-bottom: 7px; display: flex; align-items: center; gap: 7px; flex-wrap: wrap;
+  }
+  .tc-time {
+    display: inline-block; background: var(--accent2); color: #fff;
+    font-size: 10px; padding: 2px 7px; white-space: nowrap;
+  }
+  .tc-detail { font-size: 11px; color: var(--muted); line-height: 1.75; }
+  .tc-transfer {
+    display: inline-block; font-size: 10px; color: var(--accent);
+    border: 0.5px solid var(--accent); padding: 1px 6px; margin: 1px 0;
+  }
+  .section-header { display: flex; align-items: center; gap: 16px; padding: 28px 32px 0; }
+  .section-num {
+    font-family: 'Playfair Display', serif; font-size: 46px; font-weight: 700;
+    color: var(--paper2); line-height: 1; user-select: none; flex-shrink: 0;
+  }
+  .section-en { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); }
+  .section-zh {
+    font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700;
+    color: var(--ink); line-height: 1.25; margin-top: 3px;
+  }
+  .day-rule { height: 0.5px; background: var(--ink); margin: 8px 32px 0; }
+  .day-badge {
+    display: inline-block; background: var(--accent2); color: #fff;
+    font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
+    padding: 4px 14px; margin: 12px 32px 0;
+  }
+  .timeline { padding: 16px 32px 28px; display: grid; grid-template-columns: 64px 1fr; gap: 0; }
+  .tl-time {
+    font-size: 11px; color: var(--muted); padding-top: 5px;
+    font-variant-numeric: tabular-nums; letter-spacing: 0.03em;
+  }
+  .tl-item { border-left: 0.5px solid var(--border); padding: 0 0 22px 20px; position: relative; }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-item::before {
+    content: ''; position: absolute; left: -4px; top: 9px;
+    width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
+  }
+  .tl-tag {
+    display: inline-block; font-size: 9px; letter-spacing: 0.18em;
+    text-transform: uppercase; padding: 2px 7px;
+    border: 0.5px solid currentColor; margin-bottom: 5px; font-weight: 500;
+  }
+  .tag-food { color: var(--accent); }
+  .tag-sight { color: var(--accent2); }
+  .tag-shop { color: #8a4a6b; }
+  .tag-night { color: #2a3a5a; }
+  .tag-cafe { color: #7a5a2a; }
+  .tag-transit { color: #4a4a4a; }
+  .tag-flight { color: #1a6a3a; }
+  .tl-place-link { display: block; text-decoration: none; color: inherit; }
+  .tl-place-link:hover .tl-place { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .tl-place {
+    font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700;
+    color: var(--ink); line-height: 1.3; transition: color 0.15s; margin-bottom: 4px;
+  }
+  .tl-map-badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 10px; color: var(--accent2);
+    border: 0.5px solid var(--accent2); padding: 2px 8px; margin-bottom: 6px;
+    text-decoration: none; font-family: 'DM Sans', sans-serif;
+    font-weight: 500; letter-spacing: 0.05em;
+  }
+  .tl-map-badge:hover { background: var(--accent2); color: #fff; }
+  .tl-map-badge svg { width: 10px; height: 10px; fill: currentColor; flex-shrink: 0; }
+  .tl-place-sub { font-size: 11px; color: var(--muted); font-style: italic; display: block; margin-bottom: 5px; }
+  .tl-desc { font-size: 13px; color: var(--muted); line-height: 1.65; font-weight: 300; }
+  .tl-tip { display: block; font-size: 11px; color: var(--gold); margin-top: 5px; font-style: italic; font-family: 'Playfair Display', serif; }
+  .tl-transit {
+    background: #ede9e0; border-left: 2px solid var(--accent2);
+    padding: 9px 12px; font-size: 11px; color: #2a4a6b;
+    line-height: 1.8; margin-top: 6px;
+  }
+  .divider-full { border-top: 0.5px solid var(--border); }
+  .pullquote { background: var(--accent); padding: 28px 48px; text-align: center; }
+  .pullquote p { font-family: 'Playfair Display', serif; font-size: 18px; font-style: italic; color: #fff; line-height: 1.6; }
+  .pullquote cite { display: block; margin-top: 10px; font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.5); font-style: normal; font-family: 'DM Sans', sans-serif; }
+  .tips-grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 0.5px solid var(--border); }
+  .tip-card { padding: 22px 26px; border-right: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); }
+  .tip-card:nth-child(even) { border-right: none; }
+  .tip-card:nth-last-child(-n+2) { border-bottom: none; }
+  .tip-icon { font-size: 20px; margin-bottom: 8px; display: block; }
+  .tip-title { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 5px; }
+  .tip-body { font-size: 12px; color: var(--muted); line-height: 1.65; font-weight: 300; }
+  .footer-bar {
+    background: var(--ink); padding: 18px 32px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;
+  }
+  .footer-bar span { font-size: 10px; letter-spacing: 0.18em; color: rgba(255,255,255,0.35); text-transform: uppercase; }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 15px; color: rgba(255,255,255,0.65); font-style: italic; letter-spacing: 0; text-transform: none; }
+  @media (max-width: 620px) {
+    body { padding: 0; }
+    .magazine { box-shadow: none; }
+    .hero { height: 400px; }
+    .hero-title { font-size: 36px; }
+    .transport-grid { grid-template-columns: 1fr; }
+    .tips-grid { grid-template-columns: 1fr; }
+    .tip-card { border-right: none; }
+    .intro-row { grid-template-columns: 1fr 1fr; }
+    .intro-stat:nth-child(2) { border-right: none; }
+    .timeline { grid-template-columns: 54px 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="magazine">
 
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <span class="hero-label">Travel · Korea · 江南深度遊</span>
+    <span class="issue-tag">4D3N · Seoul</span>
+    <div class="hero-content">
+      <p class="hero-kicker">A Personal Travel Guide</p>
+      <h1 class="hero-title">Seoul,<br><em>My Way</em></h1>
+      <div class="hero-dates">
+        <div class="hero-date-pill"><span class="pdot go"></span>4/14（一）07:05 高雄起飛 → 11:00 仁川抵達</div>
+        <div class="hero-date-pill"><span class="pdot back"></span>4/17（四）12:05 仁川起飛 → 14:05 高雄抵達</div>
+        <div class="hero-date-pill"><span class="pdot hotel"></span>GOYOO INN &amp; HOMES · Gangnam District</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule-bar"></div>
+
+  <div class="intro-row">
+    <div class="intro-stat"><div class="stat-num">4/14</div><div class="stat-label">去程<br>07:05 起飛</div></div>
+    <div class="intro-stat"><div class="stat-num">4/17</div><div class="stat-label">回程<br>12:05 起飛</div></div>
+    <div class="intro-stat"><div class="stat-num">3晚</div><div class="stat-label">江南區<br>為基地</div></div>
+    <div class="intro-stat"><div class="stat-num">7+</div><div class="stat-label">精選地點<br>附地圖連結</div></div>
+  </div>
+
+  <div class="transport-section">
+    <div class="section-label">交通路線參考 · Transit Quick Reference</div>
+    <div class="transport-grid">
+      <div class="transport-card">
+        <div class="tc-route">仁川機場 → 飯店（宣陵）<span class="tc-time">約 80 分</span></div>
+        <div class="tc-detail">
+          AREX 機場鐵路 → 首爾站（43分）<br>
+          4號線 淑大入口方向 7站 →<br>
+          <span class="tc-transfer">舍堂站 換乘</span><br>
+          2號線 方背站方向 6站 → <strong>宣陵站</strong>
+        </div>
+      </div>
+      <div class="transport-card">
+        <div class="tc-route">飯店 → 明洞<span class="tc-time">約 37 分</span></div>
+        <div class="tc-detail">
+          2號線 驛三站方向 6站 →<br>
+          <span class="tc-transfer">舍堂站 換乘</span><br>
+          4號線 總神大學方向 9站 → <strong>明洞站</strong>
+        </div>
+      </div>
+      <div class="transport-card">
+        <div class="tc-route">飯店 → 星巴克典藏<span class="tc-time">約 15 分</span></div>
+        <div class="tc-detail">
+          2號線 驛三站方向 3站 →<br>
+          <span class="tc-transfer">首爾教育大學站 換乘</span><br>
+          3號線 1站 → <strong>高速巴士客運站</strong>
+        </div>
+      </div>
+      <div class="transport-card">
+        <div class="tc-route">飯店 → 樂天世界塔<span class="tc-time">約 10 分</span></div>
+        <div class="tc-detail">
+          2號線 三成站方向 4站 →<br>
+          <strong>蠶室站</strong> 下車，步行約 5 分鐘
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 1 -->
+  <div class="section-header">
+    <div class="section-num">01</div>
+    <div>
+      <div class="section-en">Day One · 4月14日（一）</div>
+      <div class="section-zh">11:00 抵達仁川 · 安頓 · 初探首爾</div>
+    </div>
+  </div>
+  <div class="day-rule"></div>
+  <span class="day-badge">4月14日（一）· 抵達首爾</span>
+
+  <div class="timeline">
+    <div class="tl-time">07:05</div>
+    <div class="tl-item">
+      <span class="tl-tag tag-flight">去程航班</span>
+      <a class="tl-place-link" href="https://maps.google.com/?q=高雄國際機場" target="_blank">
+        <div class="tl-place">高雄國際機場 起飛</div>
+      </a>
+      <a class="tl-map-badge" href="https://maps.google.com/?q=高雄國際機場+KHH&ll=22.5771,120.3489" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        在 Google Maps 開啟
+      </a>
+      <div class="tl-desc">07:05 從高雄出發，飛行約 2.5 小時，11:00 抵達仁川國際機場。</div>
+      <span class="tl-tip">✦ 建議提前 2 小時到機場，05:00 前出門</span>
+    </div>
+
+    <div class="tl-time">11:00</div>
+    <div class="tl-item">
+      <span class="tl-tag tag-transit">入境交通</span>
+      <a class="tl-place-link" href="https://maps.google.com/?q=仁川國際機場&ll=37.4602,126.4407" target="_blank">
+        <div class="tl-place">仁川國際機場 ICN</div>
+      </a>
+      <a class="tl-map-badge" href="https://maps.google.com/?q=인천국제공항&ll=37.4602,126.4407" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        在 Google Maps 開啟
+      </a>
+      <div class="tl-transit">
+        AREX 機場鐵路 直達首爾站（約 43 分）<br>
+        4號線 淑大入口方向 7站 → 舍堂站換乘<br>
+        2號線 方背站方向 6站 → 宣陵站<br>
+        <strong>預計 13:30 前後抵達飯店</strong>
+      </div>
+      <span class="tl-tip">✦ 首爾站可辦城市托運，行李直送機場超方便</span>
+    </div>
+
+    <div class="tl-time">14:00</div>
+    <div class="tl-item">
+      <span class="tl-tag tag-food">午晚餐</span>
+      <a class="tl-place-link" href="https://maps.google.com/?q=동래정+선릉직영점&ll=37.5044,127.0486" target="_blank">
+        <div class="tl-place">東萊鄭 · 宣陵直營店</div>
+      </a>
+      <a class="tl-map-badge" href="https://maps.google.com/?q=동래정+선릉직영점+서울+강남구&ll=37.5044,127.0486" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        在 Google Maps 開啟
+      </a>
+      <span class="tl-place-sub">Dongnaejeong Seolleung · Gangnam District</span>
+      <div class="tl-desc">百年歷史傳統韓定食名店，料理精緻考究。抵達首爾第一餐選擇正統韓國宮廷料理，小菜十幾樣一起上桌，暖胃又滿足。</div>
+      <span class="tl-tip">✦ 宣陵直營店步行即達，建議提前訂位</span>
+    </div>
+
+    <div class="tl-time">15:30</div>
+    <div class="tl-item">
+      <span class="tl-tag tag-sight">景點</span>
+      <a class="tl-place-link" href="https://maps.google.com/?q=별마당+도서관+COEX&ll=37.5128,127.0584" target="_blank">
+        <div class="tl-place">星空圖書館 별마당 도서관</div>
+      </a>
+      <a class="tl-map-badge" href="https://maps.google.com/?q=별마당+도서관+코엑스+강남구&ll=37.5128,127.0584" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        在 Google Maps 開啟
+      </a>
+      <span class="tl-place-sub">COEX Mall · Gangnam District</span>
+      <div class="tl-desc">三層樓高書牆，完全免費入場，首爾最上鏡的室內空間之一。下午天窗光線灑落，拍照效果絕佳，記得從二樓往下取景。</div>
+      <span class="tl-tip">✦ 免費參觀，15:00–17:00 光線最美</span>
+    </div>
+
+    <div class="tl-time">19:00</div>
+    <div class="tl-item">
+      <span class="tl-tag tag-shop">逛街</span>
+      <a class="tl-place-link" href="https://maps.google.com/?q=명동+서울&ll=37.5636,126.9827" target="_blank">
+        <div class="tl-place">明洞 Myeongdong 夜間踩點</div>
+      </a>
+      <a class="tl-map-badge" href="https://maps.google.com/?q=명동+서울시+중구&ll=37.5636,126.9827" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        在 Google Maps 開啟
+      </a>
+      <div class="tl-transit">
+        2號線 驛三站方向 6站 → 舍堂站換乘<br>
+        4號線 總神大學方向 9站 → 明洞站，約 37 分鐘
+      </div>
+      <div class="tl-desc">保養品、魚板湯、起司雞蛋糕，今晚不用力掃貨，先感受氣氛踩點，Day 4 再正式出手。</div>
+    </div>
+  </div>
+
+  <div class="divider-full"></div>
+
+  <!-- DAY 2 -->
+  <div class="section-header">
+    <div class="section-num">02</div>
+    <div>
+      <div class="section-en">Day Two · 4月15日（二）</div>
+      <div class="section-zh">咖啡巡禮 · 星巴克典藏 · 一牛和牛</div>
+    </div>
+  </div>
+  <div class="day-rule"></div>
+  <span class="day-badge">4月15日（二）· 咖啡與美食日</span>
+
+  <div class="timeline">
+    <div class="tl-time">09:30</div>
+    <div class="tl-item">
+      <span class="tl-tag tag-cafe">咖啡</span>
+      <a class="tl-place-link" href="https://maps.google.com/?q=매머드커피+강남&ll=37.5175,127.0473" target="_blank">
+        <div class="tl-place">MAMMOTH COFFEE 매머드커피</div>
+      </a>
+      <a class="tl-map-badge" href="https://maps.google.com/?q=MAMMOTH+COFFEE+매머드커피+강남구&ll=37.5175,127.0473" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        在 Google Maps 開啟
+      </a>
+      <span class="tl-place-sub">Gangnam District, Seoul</span>
+      <div class="tl-desc">首爾頂級精品咖啡館，以高品質單品豆和嚴謹萃取聞名。江南區本店空間寬敞，早晨靜靜喝一杯，感受首爾咖啡文化的認真程度。</div>
+      <span class="tl-tip">✦ 推薦單品手沖，豆子每日更換</span>
+    </div>
+
+    <div class="tl-time">13:00</div>
+    <div class="tl-item">
+      <span class="tl-tag tag-cafe">星巴克典藏</span>
+      <a class="tl-place-link" href="https://maps.google.com/?q=스타벅스+파미에파크R점+서초구&ll=37.5047,127.0050" target="_blank">
+        <div class="tl-place">星巴克典藏 Famille Park 店</div>
+      </a>
+      <a class="tl-map-badge" href="https://maps.google.com/?q=스타벅스+파미에파크R점&ll=37.5047,127.0050" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        在 Google Maps 開啟
+      </a>
+      <span class="tl-place-sub">스타벅스 파미에파크R점 · Seocho District</span>
+      <div class="tl-transit">
+        2號線 驛三站方向 3站 → 首爾教育大學站換乘<br>
+        3號線 1站 → 高速巴士客運站，約 15 分鐘
+      </div>
+      <div class="tl-desc">韓國限定星巴克典藏體驗店，空間設計感強，備有獨家特調飲品。Famille Park 商場採光極好，是首爾咖啡廳打卡必訪清單之一。</div>
+      <span class="tl-tip">✦ 建議從二樓往中庭取景，層次感很強</span>
+    </div>
+
+    <div class="tl-time">18:30</div>
+    <div class="tl-item">
+      <span class="tl-tag tag-food">晚餐</span>
+      <a class="tl-place-link" href="https://maps.google.com/?q=이치규+본점+강남구&ll=37.5172,127.0471" target="_blank">
+        <div class="tl-place">이치규 본점 · 一牛 いちぎゅう</div>
+      </a>
+      <a class="tl-map-badge" href="https://maps.google.com/?q=japanese+restaurant+ichigyu+이치규+본점+강남&ll=37.5172,127.0471" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        在 Google Maps 開啟
+      </a>
+      <span class="tl-place-sub">Japanese Restaurant Ichigyu · Gangnam District</span>
+      <div class="tl-desc">江南區日式和牛燒肉名店，肉質細嫩脂肪分佈完美。每片肉都處理得非常精準，服務細緻，是本次旅行最值得期待的一餐。</div>
+      <span class="tl-tip">✦ 強烈建議提前預約，非常難訂！</span>
+    </div>
+
+    <div class="tl-time">21:00</div>
+    <div class="tl-item">
+      <span class="tl-tag tag-night">夜遊</span>
+      <a class="tl-place-link" href="https://maps.google.com/?q=청담동+서울&ll=37.5207,127.0533" target="_blank">
+        <div class="tl-place">清潭洞 · 江南夜間漫步</div>
+      </a>
+      <a class="tl-map-badge" href="https://maps.google.com/?q=청담동+강남구+서울&ll=37.5207,127.0533" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        在 Google Maps 開啟
+      </a>
+      <div class="tl-desc">餐後沿清潭洞散步消化，感受首爾最精華的夜間街景，可順道逛精品店櫥窗。</div>
+    </div>
+  </div>
+
+  <div class="pullquote">
+    <p>"在首爾，每一杯咖啡都是認真的，每一塊肉都是儀式。"</p>
+    <cite>Seoul · Personal Travel Notes · April 2025</cite>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="section-header">
+    <div class="section-num">03</div>
+    <div>
+      <div class="section-en">Day Three · 4月16日（三）</div>
+      <div class="section-zh">樂天世界塔 · 國家地理 · XEXYMIX</div>
+    </div>
+  </div>
+  <div class="day-rule"></div>
+  <span class="day-badge">4月16日（三）· 購物與高空日</span>
+
+  <div class="timeline">
+    <div class="tl-time">10:00</div>
+    <div class="tl-item">
+      <span class="tl-tag tag-transit">交通</span>
+      <a class="tl-place-link" href="https://maps.google.com/?q=롯데월드타워+잠실&ll=37.5126,127.1029" target="_blank">
+        <div class="tl-place">飯店 → 蠶室站 · 樂天世界塔</div>
+      </a>
+      <a class="tl-map-badge" href="https://maps.google.com/?q=롯데월드타워+잠실역&ll=37.5126,127.1029" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        在 Google Maps 開啟
+      </a>
+      <div class="tl-transit">
+        2號線 三成站方向 4站 → 蠶室站 下車<br>
+        步行約 5 分鐘即達樂天世界大廈，全程約 10 分鐘
+      </div>
+    </div>
+
+    <div class="tl-time">10:30</div>
+    <div class="tl-item">
+      <span class="tl-tag tag-shop">購物</span>
+      <a class="tl-place-link" href="https://maps.google.com/?q=젝시믹스+롯데월드몰&ll=37.5130,127.1004" target="_blank">
+        <div class="tl-place">XEXYMIX · 樂天世界 Mall</div>
+      </a>
+      <a class="tl-map-badge" href="https://maps.google.com/?q=XEXYMIX+젝시믹스+롯데월드몰+잠실&ll=37.5130,127.1004" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        在 Google Maps 開啟
+      </a>
+      <div class="tl-desc">韓國本土高端運動機能服品牌，以優異版型和時尚設計在韓國健身圈爆紅。樂天世界 Mall 店面款式完整，比台灣購買便宜許多。</div>
+      <span class="tl-tip">✦ 尺碼偏韓版，務必試穿再下手</span>
+    </div>
+
+    <div class="tl-time">12:30</div>
+    <div class="tl-item">
+      <span class="tl-tag tag-food">午餐</span>
+      <a class="tl-place-link" href="https://maps.google.com/?q=롯데월드몰+푸드코트&ll=37.5130,127.1004" target="_blank">
+        <div class="tl-place">樂天世界 Mall 美食街</div>
+      </a>
+      <a class="tl-map-badge" href="https://maps.google.com/?q=롯데월드몰+식당가+잠실&ll=37.5130,127.1004" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        在 Google Maps 開啟
+      </a>
+      <div class="tl-desc">B1–B2 美食街集結各式餐廳，可依心情選擇韓定食、日式料理或現代韓國料理。</div>
+    </div>
+
+    <div class="tl-time">14:00</div>
+    <div class="tl-item">
+      <span class="tl-tag tag-sight">景點</span>
+      <a class="tl-place-link" href="https://maps.google.com/?q=롯데월드타워+서울스카이&ll=37.5126,127.1029" target="_blank">
+        <div class="tl-place">國家地理 × 樂天世界塔 Seoul Sky</div>
+      </a>
+      <a class="tl-map-badge" href="https://maps.google.com/?q=롯데월드타워+서울스카이+전망대&ll=37.5126,127.1029" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        在 Google Maps 開啟
+      </a>
+      <div class="tl-desc">國家地理頻道特色體驗展區，結合攝影、探險主題，視覺震撼強烈。123 層展望台 Seoul Sky 可俯瞰整個首爾盆地，傍晚夕陽轉夜景兩種氛圍一次收。</div>
+      <span class="tl-tip">✦ 建議 17:30 前上去，夕陽最美</span>
+    </div>
+
+    <div class="tl-time">20:00</div>
+    <div class="tl-item">
+      <span class="tl-tag tag-night">夜遊</span>
+      <a class="tl-place-link" href="https://maps.google.com/?q=석촌호수+서울&ll=37.5097,127.1004" target="_blank">
+        <div class="tl-place">石村湖公園 夜景散步</div>
+      </a>
+      <a class="tl-map-badge" href="https://maps.google.com/?q=석촌호수+잠실+송파구&ll=37.5097,127.1004" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        在 Google Maps 開啟
+      </a>
+      <div class="tl-desc">樂天世界塔正對面的石村湖，入夜後倒映燈光如鏡。沿湖散步是蠶室區最愜意的夜晚，不用花錢，只需要一點悠閒的心情。</div>
+    </div>
+  </div>
+
+  <div class="divider-full"></div>
+
+  <!-- DAY 4 -->
+  <div class="section-header">
+    <div class="section-num">04</div>
+    <div>
+      <div class="section-en">Day Four · 4月17日（四）</div>
+      <div class="section-zh">明洞掃貨 · 12:05 仁川起飛 · 回家</div>
+    </div>
+  </div>
+  <div class="day-rule"></div>
+  <span class="day-badge">4月17日（四）· 最終日 · 回家</span>
+
+  <div class="timeline">
+    <div class="tl-time">08:30</div>
+    <div class="tl-item">
+      <span class="tl-tag tag-shop">最終掃貨</span>
+      <a class="tl-place-link" href="https://maps.google.com/?q=명동+서울&ll=37.5636,126.9827" target="_blank">
+        <div class="tl-place">明洞 Myeongdong 正式掃貨</div>
+      </a>
+      <a class="tl-map-badge" href="https://maps.google.com/?q=명동+서울시+중구&ll=37.5636,126.9827" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        在 Google Maps 開啟
+      </a>
+      <div class="tl-transit">
+        2號線 驛三站方向 6站 → 舍堂站換乘<br>
+        4號線 總神大學方向 9站 → 明洞站，約 37 分鐘
+      </div>
+      <div class="tl-desc">保養品（AHC、Laneige、Cosrx）、零食禮盒、伴手禮最終採購。建議帶行李箱直接過來，買完打包準備出發。</div>
+      <span class="tl-tip">✦ 回程 12:05 起飛，09:00 前到明洞，留足夠時間</span>
+    </div>
+
+    <div class="tl-time">10:00</div>
+    <div class="tl-item">
+      <span class="tl-tag tag-food">最後一餐</span>
+      <a class="tl-place-link" href="https://maps.google.com/?q=명동교자+본점&ll=37.5636,126.9850" target="_blank">
+        <div class="tl-place">明洞餃子 · 刀切面 명동교자</div>
+      </a>
+      <a class="tl-map-badge" href="https://maps.google.com/?q=명동교자+본점+명동&ll=37.5636,126.9850" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        在 Google Maps 開啟
+      </a>
+      <div class="tl-desc">首爾排隊必吃，刀切面湯底清甜乾淨，韓式餃子皮薄餡厚。臨走前最後一餐，簡單、暖胃、記憶深刻。</div>
+      <span class="tl-tip">✦ 平均等待 20–30 分鐘，一定要排！值得！</span>
+    </div>
+
+    <div class="tl-time">10:50</div>
+    <div class="tl-item">
+      <span class="tl-tag tag-transit">回程交通</span>
+      <a class="tl-place-link" href="https://maps.google.com/?q=서울역+공항철도&ll=37.5547,126.9706" target="_blank">
+        <div class="tl-place">首爾站 → 仁川國際機場</div>
+      </a>
+      <a class="tl-map-badge" href="https://maps.google.com/?q=서울역+공항철도+AREX&ll=37.5547,126.9706" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        在 Google Maps 開啟
+      </a>
+      <div class="tl-transit">
+        明洞站 → 首爾站（4號線，約 10 分鐘）<br>
+        AREX 機場鐵路 → 仁川機場（約 43 分鐘）<br>
+        <strong>預計 12:05 起飛前約 80 分抵達機場</strong>
+      </div>
+      <span class="tl-tip">✦ 首爾站可提前辦理城市托運，行李直送高雄</span>
+    </div>
+
+    <div class="tl-time">12:05</div>
+    <div class="tl-item">
+      <span class="tl-tag tag-flight">回程航班</span>
+      <a class="tl-place-link" href="https://maps.google.com/?q=인천국제공항&ll=37.4602,126.4407" target="_blank">
+        <div class="tl-place">仁川機場起飛 → 14:05 高雄落地</div>
+      </a>
+      <a class="tl-map-badge" href="https://maps.google.com/?q=인천국제공항+ICN&ll=37.4602,126.4407" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        在 Google Maps 開啟
+      </a>
+      <div class="tl-desc">飛行約 2.5 小時，14:05 抵達高雄國際機場。帶著滿滿戰利品和回憶，旅程圓滿結束。</div>
+      <span class="tl-tip">✦ 掰掰首爾，下次見！</span>
+    </div>
+  </div>
+
+  <!-- TIPS -->
+  <div class="tips-grid">
+    <div class="tip-card">
+      <span class="tip-icon">🚇</span>
+      <div class="tip-title">T-money 交通卡</div>
+      <div class="tip-body">一張搞定地鐵、公車、便利商店付款。仁川機場入境大廳即可購買，建議先儲值 3 萬韓元。</div>
+    </div>
+    <div class="tip-card">
+      <span class="tip-icon">📱</span>
+      <div class="tip-title">Naver Map 導航</div>
+      <div class="tip-body">韓國最準確的地圖 App，地鐵換乘、步行導航都靠它。搭配韓國 eSIM（KT 或 SKT）使用最穩。</div>
+    </div>
+    <div class="tip-card">
+      <span class="tip-icon">💳</span>
+      <div class="tip-title">現金備用</div>
+      <div class="tip-body">傳統市場與小吃攤仍以現金為主。建議準備 5–10 萬韓元現金，大型商場與餐廳刷卡都 OK。</div>
+    </div>
+    <div class="tip-card">
+      <span class="tip-icon">🛍️</span>
+      <div class="tip-title">必買清單</div>
+      <div class="tip-body">XEXYMIX 運動服、韓國保養品、即食泡麵、海苔禮盒、MAMMOTH COFFEE 豆子、韓國零食伴手禮。</div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <span>Seoul 4D3N · 4/14–4/17 · Gangnam Base · Personal Guide</span>
+    <span class="footer-logo">Seoul, My Way</span>
+  </div>
+
+</div>
+</body>
+</html>
