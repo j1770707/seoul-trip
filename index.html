@@ -70,7 +70,14 @@
     font-size: 56px; font-weight: 700; color: #fff;
     line-height: 1.0; letter-spacing: -0.5px;
   }
-  .hero-title em { font-style: italic; color: #e8d8a0; }
+  .hero-title em {
+    font-style: italic;
+    font-weight: 400;
+    color: #e8d8a0;
+    letter-spacing: -1px;
+    display: inline-block;
+    transform: translateY(2px);
+  }
   .hero-dates { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
   .hero-date-pill {
     display: inline-flex; align-items: center; gap: 7px;
@@ -155,6 +162,7 @@
   .tag-food { color: var(--accent); }
   .tag-sight { color: var(--accent2); }
   .tag-shop { color: #8a4a6b; }
+  .tag-beauty { color: #8b6b7e; }
   .tag-night { color: #2a3a5a; }
   .tag-cafe { color: #7a5a2a; }
   .tag-transit { color: #4a4a4a; }
@@ -199,6 +207,30 @@
   }
   .footer-bar span { font-size: 10px; letter-spacing: 0.18em; color: rgba(255,255,255,0.35); text-transform: uppercase; }
   .footer-logo { font-family: 'Playfair Display', serif; font-size: 15px; color: rgba(255,255,255,0.65); font-style: italic; letter-spacing: 0; text-transform: none; }
+  @media (min-width: 1100px) {
+    body { padding: 40px 24px; }
+    .magazine {
+      max-width: 1120px;
+      width: min(1120px, calc(100vw - 80px));
+    }
+    .hero { height: 580px; }
+    .hero-content { padding: 0 48px 44px; }
+    .hero-label { left: 48px; }
+    .issue-tag { right: 48px; }
+    .hero-title { font-size: 72px; }
+    .transport-section { padding: 30px 48px; }
+    .section-header { padding: 34px 48px 0; }
+    .day-rule { margin: 10px 48px 0; }
+    .day-badge { margin: 14px 48px 0; }
+    .timeline {
+      padding: 18px 48px 34px;
+      grid-template-columns: 84px 1fr;
+    }
+    .tips-grid { grid-template-columns: 1fr 1fr 1fr 1fr; }
+    .tip-card:nth-child(2) { border-right: 0.5px solid var(--border); }
+    .tip-card:nth-child(4) { border-right: none; }
+    .tip-card:nth-last-child(-n+2) { border-bottom: none; }
+  }
   @media (max-width: 620px) {
     body { padding: 0; }
     .magazine { box-shadow: none; }
@@ -315,10 +347,10 @@
         在 Google Maps 開啟
       </a>
       <div class="tl-transit">
-        AREX 機場鐵路 直達首爾站（約 43 分）<br>
-        4號線 淑大入口方向 7站 → 舍堂站換乘<br>
-        2號線 方背站方向 6站 → 宣陵站<br>
-        <strong>預計 13:30 前後抵達飯店</strong>
+        AREX 機場鐵路直達首爾站（約 43 分）<br>
+        抵達後先在首爾站寄放行李，再轉往明洞用餐<br>
+        整體節奏會比先衝飯店更俐落，也更適合直接展開市區行程<br>
+        <strong>中午前後可順利銜接首爾站寄放行李與明洞午餐</strong>
       </div>
       <span class="tl-tip">✦ 首爾站可辦城市托運，行李直送機場超方便</span>
     </div>
@@ -387,11 +419,11 @@
     <div class="section-num">02</div>
     <div>
       <div class="section-en">Day Two · 4月15日（二）</div>
-      <div class="section-zh">樂天世界塔 · 國家地理 · XEXYMIX</div>
+      <div class="section-zh">XEXYMIX · PPEUM · Seoul Sky</div>
     </div>
   </div>
   <div class="day-rule"></div>
-  <span class="day-badge">4月15日（二）· 購物與高空日</span>
+  <span class="day-badge">4月15日（二）· 購物・醫美・高空日</span>
 
   <div class="timeline">
     <div class="tl-time">12:00</div>
@@ -415,7 +447,7 @@
 
     <div class="tl-time">14:00</div>
     <div class="tl-item">
-      <span class="tl-tag tag-shop">醫美</span>
+      <span class="tl-tag tag-beauty">醫美</span>
       <a class="tl-place-link" href="https://maps.app.goo.gl/tPionFiVog4DtH8CA?g_st=ic" target="_blank">
         <div class="tl-place">麗芬聚 PPEUM 江南國際總店 醫美診所</div>
       </a>
@@ -423,7 +455,7 @@
         <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
         在 Google Maps 開啟
       </a>
-      <div class="tl-desc">把醫美行程安排在下午中段來挨痛，前後都還有彈性，後面再接高空景點與夜生活更能帥氣登場。</div>
+      <div class="tl-desc">把醫美行程安排在下午中段，前後都還有彈性，後面再接高空景點與夜生活也更順。</div>
       <span class="tl-tip">✦ 建議先確認預約時間，並預留報到與等待彈性</span>
     </div>
     <div class="tl-time">16:00</div>
@@ -445,7 +477,7 @@
       <span class="tl-tag tag-night">夜生活</span>
       <div class="tl-place">Shelter 夜間行程</div>
       <span class="tl-place-sub">After Hours · Curated Night Chapter</span>
-      <div class="tl-desc">高空視野、購物與城市光線之後，第三晚不安排湖邊慢走，而是直接把情緒延長到 Shelter。這一晚的重點不是再看景，而是讓整趟首爾行在更深的夜色裡收緊、發亮，留下帶有溫度與張力的結尾。</div>
+      <div class="tl-desc">高空視野、購物與城市光線之後，第二晚不再安排額外繞景，而是直接把情緒延長到 Shelter。這一晚的重點不是再多看一個點，而是讓整天的節奏在更深的夜色裡收緊、發亮，留下帶有溫度與張力的結尾。</div>
       <span class="tl-tip">✦ 白天活動量較高，建議回飯店短暫休息後再出發，夜晚狀態會更穩</span>
     </div>
   
@@ -476,7 +508,7 @@
         在 Google Maps 開啟
       </a>
       <span class="tl-place-sub">Gangnam District, Seoul</span>
-      <div class="tl-desc">首爾頂級精品咖啡館，以高品質單品豆和嚴謹萃取聞名。江南區本店空間寬敞，早晨靜靜喝一杯，感受首爾咖啡文化的認真程度。</div>
+      <div class="tl-desc">首爾頂級精品咖啡館，以高品質單品豆和嚴謹萃取聞名。江南區本店空間寬敞，中午到午後來一杯也很剛好，感受首爾咖啡文化對細節的認真程度。</div>
       <span class="tl-tip">✦ 推薦單品手沖，豆子每日更換</span>
     </div>
 
@@ -534,7 +566,7 @@
       <span class="tl-tag tag-night">夜生活</span>
       <div class="tl-place">Shelter 發展場狂歡</div>
       <span class="tl-place-sub">After Hours · Curated Night Chapter</span>
-      <div class="tl-desc">白天的咖啡、典藏與和牛已經足夠精緻，夜晚則不再散步收尾，而是把節奏交給 Shelter。這一段不靠觀光感撐場，而是用更成熟、更貼身的夜生活氛圍，把 Day 2 推向真正的深夜版本。</div>
+      <div class="tl-desc">白天的咖啡、典藏與和牛已經足夠精緻，夜晚則不再散步收尾，而是把節奏交給 Shelter。這一段不靠觀光感撐場，而是用更成熟、更貼身的夜生活氛圍，把 Day 3 推向真正的深夜版本。</div>
       <span class="tl-tip">✦ 晚餐後可預留彈性時間，不把行程塞滿，夜晚的好看常常發生在留白之後</span>
     </div>
   
@@ -590,7 +622,7 @@
       <div class="tl-transit">
         明洞站 → 首爾站（4號線，約 10 分鐘）<br>
         AREX 機場鐵路 → 仁川機場（約 43 分鐘）<br>
-        <strong>預計 12:05 起飛前約 80 分抵達機場</strong>
+        <strong>10:50 左右出發會偏趕，建議再提早一些動身更穩</strong>
       </div>
       <span class="tl-tip">✦ 首爾站可提前辦理城市托運，行李直送高雄</span>
     </div>
