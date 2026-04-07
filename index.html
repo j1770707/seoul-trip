@@ -34,34 +34,34 @@
   }
   .hero {
     position: relative;
-    height: 520px;
+    height: 460px;
     overflow: hidden;
     background: #000;
-    padding: 20px;
+    padding: 18px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
   }
   .hero-bg {
     position: absolute;
-    inset: 20px;
+    inset: 18px;
     background:
-      linear-gradient(to bottom, rgba(10,10,10,0.08) 0%, rgba(10,10,10,0.86) 100%),
+      linear-gradient(to bottom, rgba(10,10,10,0.10) 0%, rgba(10,10,10,0.88) 100%),
       url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Gyeongbok_Palace_in_Seoul.jpg/1280px-Gyeongbok_Palace_in_Seoul.jpg') center/cover no-repeat;
   }
   .hero-label {
-    position: absolute; top: 28px; left: 32px;
+    position: absolute; top: 30px; left: 40px;
     font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
     color: rgba(255,255,255,0.55);
   }
   .issue-tag {
-    position: absolute; top: 24px; right: 32px;
+    position: absolute; top: 22px; right: 40px;
     font-size: 11px; letter-spacing: 0.15em;
     color: rgba(255,255,255,0.5);
     border: 0.5px solid rgba(255,255,255,0.3);
     padding: 4px 12px;
   }
-  .hero-content { position: relative; z-index: 2; padding: 0 32px 36px; }
+  .hero-content { position: relative; z-index: 2; padding: 0 40px 28px; }
   .hero-kicker {
     font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase;
     color: var(--gold); font-weight: 500; margin-bottom: 10px;
@@ -215,14 +215,14 @@
       width: min(1120px, calc(100vw - 80px));
     }
     .hero {
-      height: 580px;
-      padding: 28px;
+      height: 500px;
+      padding: 22px;
     }
-    .hero-bg { inset: 28px; }
-    .hero-content { padding: 0 48px 44px; }
-    .hero-label { left: 48px; top: 34px; }
-    .issue-tag { right: 48px; top: 30px; }
-    .hero-title { font-size: 72px; }
+    .hero-bg { inset: 22px; }
+    .hero-content { padding: 0 52px 34px; }
+    .hero-label { left: 52px; top: 32px; }
+    .issue-tag { right: 52px; top: 26px; }
+    .hero-title { font-size: 68px; }
     .transport-section { padding: 30px 48px; }
     .section-header { padding: 34px 48px 0; }
     .day-rule { margin: 10px 48px 0; }
@@ -240,10 +240,13 @@
     body { padding: 0; }
     .magazine { box-shadow: none; }
     .hero {
-      height: 400px;
-      padding: 14px;
+      height: 360px;
+      padding: 12px;
     }
-    .hero-bg { inset: 14px; }
+    .hero-bg { inset: 12px; }
+    .hero-content { padding: 0 24px 20px; }
+    .hero-label { top: 22px; left: 24px; }
+    .issue-tag { top: 18px; right: 24px; }
     .hero-title { font-size: 36px; }
     .transport-grid { grid-template-columns: 1fr; }
     .tips-grid { grid-template-columns: 1fr; }
@@ -493,20 +496,6 @@
       </a>
       <div class="tl-desc">國家地理頻道特色體驗展區，結合攝影、探險主題，視覺震撼強烈。123 層展望台 Seoul Sky 可俯瞰整個首爾盆地，傍晚夕陽轉夜景兩種氛圍一次收。</div>
       <span class="tl-tip">✦ 建議 17:30 前上去，夕陽最美</span>
-    </div>
-
-    <div class="tl-time">17:00</div>
-    <div class="tl-item">
-      <span class="tl-tag tag-cafe">咖啡</span>
-      <a class="tl-place-link" href="https://maps.app.goo.gl/SdPPJp7RpUnLgzZw9" target="_blank">
-        <div class="tl-place">ilgi_timeslip 일기 咖啡廳</div>
-      </a>
-      <a class="tl-map-badge" href="https://maps.app.goo.gl/SdPPJp7RpUnLgzZw9" target="_blank">
-        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-        在 Google Maps 開啟
-      </a>
-      <div class="tl-desc">高空景點之後先把人類靈魂拖去咖啡廳回血。ilgi_timeslip 일기 這段像是把今天的購物、醫美、夕陽與腦內雜訊一起丟進咖啡裡攪一攪，然後逼自己優雅地冷靜下來。</div>
-      <span class="tl-tip">✦ 這不是單純喝咖啡，這是讓今天的靈魂從購物袋裡爬回身體。若甜點一端上來還很好看，請立刻失控，這很合理！！！！！！</span>
     </div>
 
     <div class="tl-time">22:00</div>
