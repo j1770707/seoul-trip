@@ -29,23 +29,24 @@
     background: var(--paper);
     max-width: 860px;
     margin: 0 auto;
-    border: 0.5px solid var(--border);
     box-shadow: 0 12px 48px rgba(0,0,0,0.15);
+    overflow: hidden;
   }
   .hero {
     position: relative;
     height: 520px;
     overflow: hidden;
-    background: #1a1a1a;
+    background: #000;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
   }
   .hero-bg {
     position: absolute;
-    inset: 0;
+    inset: 20px;
     background:
-      linear-gradient(to bottom, rgba(10,10,10,0.05) 0%, rgba(10,10,10,0.82) 100%),
+      linear-gradient(to bottom, rgba(10,10,10,0.08) 0%, rgba(10,10,10,0.86) 100%),
       url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Gyeongbok_Palace_in_Seoul.jpg/1280px-Gyeongbok_Palace_in_Seoul.jpg') center/cover no-repeat;
   }
   .hero-label {
@@ -213,10 +214,14 @@
       max-width: 1120px;
       width: min(1120px, calc(100vw - 80px));
     }
-    .hero { height: 580px; }
+    .hero {
+      height: 580px;
+      padding: 28px;
+    }
+    .hero-bg { inset: 28px; }
     .hero-content { padding: 0 48px 44px; }
-    .hero-label { left: 48px; }
-    .issue-tag { right: 48px; }
+    .hero-label { left: 48px; top: 34px; }
+    .issue-tag { right: 48px; top: 30px; }
     .hero-title { font-size: 72px; }
     .transport-section { padding: 30px 48px; }
     .section-header { padding: 34px 48px 0; }
@@ -234,7 +239,11 @@
   @media (max-width: 620px) {
     body { padding: 0; }
     .magazine { box-shadow: none; }
-    .hero { height: 400px; }
+    .hero {
+      height: 400px;
+      padding: 14px;
+    }
+    .hero-bg { inset: 14px; }
     .hero-title { font-size: 36px; }
     .transport-grid { grid-template-columns: 1fr; }
     .tips-grid { grid-template-columns: 1fr; }
